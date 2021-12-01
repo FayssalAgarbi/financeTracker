@@ -1,4 +1,4 @@
-package com.training.simplefinancetracker
+package com.training.simplefinancetracker.core
 
 import android.app.Application
 import com.airbnb.mvrx.Mavericks

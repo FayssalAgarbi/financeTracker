@@ -12,7 +12,6 @@ import com.training.simplefinancetracker.R
 
 class MainMenuFragment : Fragment(), MavericksView {
 
-
     private val viewModel: MainMenuViewModel by fragmentViewModel()
 
     override fun onCreateView(

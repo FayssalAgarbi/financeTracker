@@ -35,7 +35,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = "1.8"
     }
 }
 
@@ -75,3 +75,4 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
     kapt "androidx.room:room-compiler:$ROOM_VERSION"
 }
+

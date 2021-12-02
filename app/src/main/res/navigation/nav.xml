@@ -9,15 +9,18 @@
         android:id="@+id/mainMenuFragment"
         android:name="com.training.simplefinancetracker.mainMenu.MainMenuFragment"
         android:label="fragment_main_menu"
-        tools:layout="@layout/fragment_main_menu" />
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cardListFragment"
         android:name="com.training.simplefinancetracker.cardList.CardListFragment"
         android:label="fragment_card_list"
-        tools:layout="@layout/fragment_card_list" />
-    <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.training.simplefinancetracker.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+        tools:layout="@layout/fragment_card_list" >
+        <action
+            android:id="@+id/action_cardListFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
 </navigation>

@@ -5,25 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.withState
 import com.training.simplefinancetracker.R
+import com.training.simplefinancetracker.databinding.FragmentMainMenuBinding
+import com.training.simplefinancetracker.util.viewBinding
+import timber.log.Timber
 
 
-class MainMenuFragment : Fragment(), MavericksView {
+class MainMenuFragment : Fragment(R.layout.fragment_main_menu), MavericksView {
 
     private val viewModel: MainMenuViewModel by fragmentViewModel()
+    private val binding: FragmentMainMenuBinding by viewBinding()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_menu, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.navToCardlistBt.setOnClickListener {
+            Timber.d("main menu bt clicked")
+            findNavController().navigate(MainMenuFragmentDirections.actionMainMenuFragmentToCardListFragment())
+        }
     }
 
-
-    override fun invalidate() {
+    override fun invalidate() = withState(viewModel) {
 
     }
 }

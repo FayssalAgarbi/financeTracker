@@ -23,6 +23,8 @@ class CardListFragment : Fragment(R.layout.fragment_card_list) {
             Timber.d("card list bt clicked")
             findNavController().navigate(CardListFragmentDirections.actionCardListFragmentToMainMenuFragment())
         }
+        binding.recycler.adapter = CardListAdapter()
+
     }
 
 

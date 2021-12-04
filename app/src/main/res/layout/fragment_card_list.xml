@@ -3,18 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/dark_blue"
     android:layout_height="match_parent"
+    android:background="@color/dark_blue"
     tools:context=".cardList.CardListFragment">
 
     <Button
         android:id="@+id/navBackBt"
-        android:text="navBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:text="navBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:spanCount="3"
+        tools:itemCount="14"
+        android:layout_marginEnd="16dp"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/navBackBt"
+        tools:listitem="@layout/base_card_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

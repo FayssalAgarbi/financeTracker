@@ -23,7 +23,7 @@ class CardListAdapter() : ListAdapter<CardListAdapter.Item, BindingViewHolder<Ba
     ): BindingViewHolder<BaseCardItemBinding> = BindingViewHolder(parent, BaseCardItemBinding::inflate)
 
     override fun onBindViewHolder(holder: BindingViewHolder<BaseCardItemBinding>, position: Int) {
-        val card = getItem(position)
+       // val card = getItem(position)
         with(holder.binding){
             valueTypeTV.text = "Fixkosten"
         }

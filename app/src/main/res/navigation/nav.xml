@@ -22,5 +22,15 @@
         <action
             android:id="@+id/action_cardListFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_cardListFragment_to_cardAdditionFragment"
+            app:destination="@id/cardAdditionFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/cardAdditionFragment"
+        android:name="com.training.simplefinancetracker.cardAddition.CardAdditionFragment"
+        android:label="fragment_card_addition"
+        tools:layout="@layout/fragment_card_addition" >
+
+    </dialog>
 </navigation>

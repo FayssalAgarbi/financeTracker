@@ -15,13 +15,6 @@ import java.util.*
  */
 
 
-@Entity
-data class Category(
-    @PrimaryKey val id: UUID = UUID.randomUUID(),
-    val description: String,
-    val costType: CostType
-)
-
 /*
  * Maybe add the column "importance", where every purchase can be weighed on a scale.
  * At the end of the month a report could be made that says
@@ -31,20 +24,13 @@ data class Category(
 @Entity
 data class Expenditure(
     @PrimaryKey val id: UUID = UUID.randomUUID(),
-    val description: String,
-    val categoryId: UUID,
+    val label: String,
+    val costType: CostType,
     val cost: Double,
-    val isPaid: Boolean
+    val isPaid: Boolean,
+    val parentId: UUID
 )
 
-data class CategoryWithExpenditures(
-    @Embedded val category: Category,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "categoryId"
-    )
-    val expenditure: Expenditure
-)
 
 enum class CostType {
     FIX, VARIABLE

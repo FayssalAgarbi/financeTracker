@@ -9,16 +9,11 @@ import java.util.*
 interface ExpenditureDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCategory(category: Category): Completable
+    fun insertExpenditure(expenditure: Expenditure): Completable
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertExpenditure(category: Category): Completable
+    @Query("SELECT * FROM Expenditure WHERE parentId = :expenditureId")
+    fun selectExpenditures(expenditureId: UUID): Observable<Expenditure>
 
-    @Transaction
-    @Query("SELECT * FROM Category")
-    fun selectAllCategoriesWithExpenditures(): Observable<List<CategoryWithExpenditures>>
-
-    @Query("SELECT * FROM Expenditure WHERE categoryId = :categoryId")
-    fun selectExpenditures(categoryId: UUID): Observable<Expenditure>
-
+    @Delete
+    fun deleteExpenditure(expenditure: Expenditure): Completable
 }

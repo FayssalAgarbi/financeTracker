@@ -31,6 +31,10 @@
         android:name="com.training.simplefinancetracker.cardAddition.CardAdditionFragment"
         android:label="fragment_card_addition"
         tools:layout="@layout/fragment_card_addition" >
-
+        <action
+            android:id="@+id/action_cardAdditionFragment_pop_including_cardListFragment"
+            app:popUpTo="@id/cardListFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/cardListFragment" />
     </dialog>
 </navigation>

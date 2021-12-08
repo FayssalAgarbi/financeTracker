@@ -11,7 +11,7 @@ import com.training.simplefinancetracker.persistence.CostType
 import com.training.simplefinancetracker.persistence.Expenditure
 import com.training.simplefinancetracker.util.BindingViewHolder
 
-class CardListAdapter : ListAdapter<CardListAdapter.Item, BindingViewHolder<BaseCardItemBinding>>(
+class CardListAdapter( private val longClickListener: (Expenditure) -> Unit) : ListAdapter<CardListAdapter.Item, BindingViewHolder<BaseCardItemBinding>>(
     object : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean = when {
             oldItem is Item.ExpenditureItem && newItem is Item.ExpenditureItem
@@ -25,6 +25,7 @@ class CardListAdapter : ListAdapter<CardListAdapter.Item, BindingViewHolder<Base
     fun update(expenditures: List<Expenditure>){
         val items = mutableListOf<Item>()
         items += expenditures.map { Item.ExpenditureItem(it) }
+        submitList(items)
     }
 
     override fun onCreateViewHolder(
@@ -45,9 +46,16 @@ class CardListAdapter : ListAdapter<CardListAdapter.Item, BindingViewHolder<Base
                     )
                 }
             )
-            valueTypeTV.text = "Placeholder"
+            valueTypeTV.text = card.expenditure.label
+            root.setOnLongClickListener {
+                longClickListener(card.expenditure)
+                true
+            }
         }
     }
+
+    fun getSpanSize(position: Int, spanCount: Int) = spanCount
+
 
     sealed class Item {
         data class ExpenditureItem(val expenditure: Expenditure) : Item()

@@ -1,5 +1,6 @@
 package com.training.simplefinancetracker.core
 
+import com.training.simplefinancetracker.cardAddition.CardAdditionViewModel
 import com.training.simplefinancetracker.cardList.CardListViewModel
 import com.training.simplefinancetracker.di.AssistedViewModelFactory
 import com.training.simplefinancetracker.di.MavericksViewModelComponent
@@ -24,4 +25,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(CardListViewModel::class)
     fun cardListViewModel(factory: CardListViewModel.Factory): AssistedViewModelFactory<*, *>
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CardAdditionViewModel::class)
+    fun cardAdditionViewModel(factory: CardAdditionViewModel.Factory): AssistedViewModelFactory<*, *>
 }

@@ -12,7 +12,7 @@ interface ExpenditureDao {
     fun insertExpenditure(expenditure: Expenditure): Completable
 
     @Query("SELECT * FROM Expenditure WHERE parentId = :expenditureId")
-    fun selectExpenditures(expenditureId: UUID): Observable<Expenditure>
+    fun selectExpenditures(expenditureId: UUID): Observable<List<Expenditure>>
 
     @Delete
     fun deleteExpenditure(expenditure: Expenditure): Completable

@@ -4,14 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.MavericksView
+import com.airbnb.mvrx.Success
+import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.withState
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.training.simplefinancetracker.databinding.FragmentCardAdditionBinding
+import com.training.simplefinancetracker.persistence.CostType
+import com.training.simplefinancetracker.persistence.Expenditure
+import java.util.*
 
 
 class CardAdditionFragment : BottomSheetDialogFragment(), MavericksView {
 
-   // private val binding: FragmentCardAdditionBinding by viewBinding()
+    private val viewModel: CardAdditionViewModel by fragmentViewModel()
     private var _binding: FragmentCardAdditionBinding? = null
     private val binding get() = _binding!!
 
@@ -20,8 +27,25 @@ class CardAdditionFragment : BottomSheetDialogFragment(), MavericksView {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentCardAdditionBinding.inflate(inflater,  container, false)
+        _binding = FragmentCardAdditionBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.saveBt.setOnClickListener {
+
+            viewModel.insertCard(
+                Expenditure(
+                    label = binding.labelTIL.editText?.text.toString(),
+                    costType = CostType.FIX,
+                    cost = binding.costTIL.editText?.text.toString().toDouble(),
+                    isPaid = binding.paidSwitch.isChecked,
+                    parentId = UUID(0, 0),
+                )
+            )
+        }
     }
 
     override fun onDestroyView() {
@@ -29,9 +53,9 @@ class CardAdditionFragment : BottomSheetDialogFragment(), MavericksView {
         super.onDestroyView()
     }
 
-
-
-    override fun invalidate() {
-        TODO("Not yet implemented")
+    override fun invalidate() = withState(viewModel) { state ->
+        if (state.isDone is Success) {
+            findNavController().navigate(CardAdditionFragmentDirections.actionCardAdditionFragmentPopIncludingCardListFragment())
+        }
     }
 }

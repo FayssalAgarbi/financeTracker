@@ -25,6 +25,12 @@
         <action
             android:id="@+id/action_cardListFragment_to_cardAdditionFragment"
             app:destination="@id/cardAdditionFragment" />
+        <argument
+            android:name="mvrx:arg"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_cardListFragment_self"
+            app:destination="@id/cardListFragment" />
     </fragment>
     <dialog
         android:id="@+id/cardAdditionFragment"
@@ -36,5 +42,8 @@
             app:popUpTo="@id/cardListFragment"
             app:popUpToInclusive="true"
             app:destination="@id/cardListFragment" />
+        <argument
+            android:name="mvrx:arg"
+            app:argType="string" />
     </dialog>
 </navigation>

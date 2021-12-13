@@ -37,13 +37,10 @@ class CardAdditionFragment : BottomSheetDialogFragment(), MavericksView {
         binding.saveBt.setOnClickListener {
 
             viewModel.insertCard(
-                Expenditure(
                     label = binding.labelTIL.editText?.text.toString(),
                     costType = CostType.FIX,
                     cost = binding.costTIL.editText?.text.toString().toDouble(),
-                    isPaid = binding.paidSwitch.isChecked,
-                    parentId = UUID(0, 0),
-                )
+                    isPaid = binding.paidSwitch.isChecked
             )
         }
     }
@@ -55,7 +52,7 @@ class CardAdditionFragment : BottomSheetDialogFragment(), MavericksView {
 
     override fun invalidate() = withState(viewModel) { state ->
         if (state.isDone is Success) {
-            findNavController().navigate(CardAdditionFragmentDirections.actionCardAdditionFragmentPopIncludingCardListFragment())
+            findNavController().navigate(CardAdditionFragmentDirections.actionCardAdditionFragmentPopIncludingCardListFragment(state.parentId.toString()))
         }
     }
 }

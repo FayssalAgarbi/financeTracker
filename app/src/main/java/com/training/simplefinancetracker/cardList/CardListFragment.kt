@@ -28,7 +28,7 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), MavericksView {
         setHasOptionsMenu(true)
 
         val layoutManager: LinearLayoutManager =
-            object : GridLayoutManager(context, 2){}.apply {
+            object : GridLayoutManager(context, 2) {}.apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int = adapter.getSpanSize(position, 1)
                 }
@@ -43,19 +43,29 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), MavericksView {
 
     }
 
+    private fun clickListener(expenditure: Expenditure) = viewModel.clickItem(SourceItem.ITEM)
+
     private fun longClickListener(expenditure: Expenditure) = viewModel.deleteCard(expenditure)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.addItemMI){
-            findNavController().navigate(CardListFragmentDirections.actionCardListFragmentToCardAdditionFragment())
+        return if (item.itemId == R.id.addItemMI) {
+            viewModel.clickItem(SourceItem.MENU)
             true
         } else super.onOptionsItemSelected(item)
     }
 
-    override fun invalidate() = withState(viewModel){ state ->
-        if(state.cardList is Success){
+    override fun invalidate() = withState(viewModel) { state ->
+        if (state.cardList is Success) {
             adapter.update(state.cardList.invoke())
         }
+        if (state.click == SourceItem.ITEM) findNavController().navigate(
+            CardListFragmentDirections.actionCardListFragmentSelf(
+                state.parentId.toString()
+            )
+        )
+        if (state.click == SourceItem.MENU) findNavController().navigate(
+            CardListFragmentDirections.actionCardListFragmentToCardAdditionFragment(state.parentId.toString())
+        )
 
     }
 }

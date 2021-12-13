@@ -13,6 +13,7 @@ import com.training.simplefinancetracker.R
 import com.training.simplefinancetracker.databinding.FragmentMainMenuBinding
 import com.training.simplefinancetracker.util.viewBinding
 import timber.log.Timber
+import java.util.*
 
 
 class MainMenuFragment : Fragment(R.layout.fragment_main_menu), MavericksView {
@@ -25,7 +26,9 @@ class MainMenuFragment : Fragment(R.layout.fragment_main_menu), MavericksView {
 
         binding.navToCardlistBt.setOnClickListener {
             Timber.d("main menu bt clicked")
-            findNavController().navigate(MainMenuFragmentDirections.actionMainMenuFragmentToCardListFragment())
+            findNavController().navigate(MainMenuFragmentDirections.actionMainMenuFragmentToCardListFragment(
+                UUID(0,0 ).toString()
+            ))
         }
     }
 

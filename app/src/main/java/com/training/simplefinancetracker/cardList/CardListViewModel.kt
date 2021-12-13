@@ -12,19 +12,24 @@ import java.util.*
 
 
 data class CardListState(
-    val cardList: Async<List<Expenditure>> = Uninitialized
-) : MavericksState
+    val parentId: UUID,
+    val cardList: Async<List<Expenditure>> = Uninitialized,
+    val click: SourceItem = SourceItem.EMPTY,
+) : MavericksState {
+    constructor(parentId: String) : this(UUID.fromString(parentId))
+}
 
 class CardListViewModel @AssistedInject constructor(
-    @Assisted state: CardListState,
+    @Assisted private val state: CardListState,
     private val repository: CardRepository
 ) : BaseMvRxViewModel<CardListState>(state) {
 
     init {
-        repository.getCardsById(UUID(0, 0)).execute { copy(cardList = it) }
+        repository.getCardsById(state.parentId).execute { copy(cardList = it) }
     }
 
     fun deleteCard(expenditure: Expenditure) = repository.deleteCard(expenditure).subscribe()
+    fun clickItem(source: SourceItem) = setState { copy(click = source) }
 
     @AssistedFactory
     interface Factory :
@@ -34,4 +39,9 @@ class CardListViewModel @AssistedInject constructor(
 
     companion object :
         MavericksViewModelFactory<CardListViewModel, CardListState> by hiltMavericksViewModelFactory()
+}
+
+
+enum class SourceItem {
+    EMPTY, MENU, ITEM
 }

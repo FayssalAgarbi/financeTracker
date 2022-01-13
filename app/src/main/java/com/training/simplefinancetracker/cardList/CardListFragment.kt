@@ -34,16 +34,22 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), MavericksView {
                 }
             }
 
-        adapter = CardListAdapter {
-            longClickListener(it)
-        }
+        adapter = CardListAdapter(
+            { longClickListener(it) },
+            { clickListener(it) }
+        )
 
         binding.recycler.layoutManager = layoutManager
         binding.recycler.adapter = adapter
 
     }
 
-    private fun clickListener(expenditure: Expenditure) = viewModel.clickItem(SourceItem.ITEM)
+    private fun clickListener(expenditure: Expenditure) =
+        findNavController().navigate(
+            CardListFragmentDirections.actionCardListFragmentSelf(
+                expenditure.id.toString()
+            )
+        )
 
     private fun longClickListener(expenditure: Expenditure) = viewModel.deleteCard(expenditure)
 
@@ -64,6 +70,7 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), MavericksView {
             )
         )
         if (state.click == SourceItem.MENU) findNavController().navigate(
+            //replace these shenanigans with parentViewModel oder whatever?
             CardListFragmentDirections.actionCardListFragmentToCardAdditionFragment(state.parentId.toString())
         )
 

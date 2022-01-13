@@ -39,7 +39,7 @@ android {
     }
 }
 
-final MAVERICKS_VERSION = '2.3.0'
+final MAVERICKS_VERSION = '2.5.1'
 final ROOM_VERSION = '2.3.0'
 dependencies {
 
@@ -62,6 +62,7 @@ dependencies {
     // Mavericks
     implementation "com.airbnb.android:mavericks:$MAVERICKS_VERSION"
     implementation "com.airbnb.android:mavericks-rxjava2:$MAVERICKS_VERSION"
+    implementation "com.airbnb.android:mavericks-navigation:$MAVERICKS_VERSION"
 
     // RxJava
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"

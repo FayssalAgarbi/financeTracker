@@ -16,7 +16,7 @@ data class CardListState(
     val cardList: Async<List<Expenditure>> = Uninitialized,
     val click: SourceItem = SourceItem.EMPTY,
 ) : MavericksState {
-    constructor(parentId: String) : this(UUID.fromString(parentId))
+    constructor(parentId: String) : this(UUID.fromString(parentId), Uninitialized)
 }
 
 class CardListViewModel @AssistedInject constructor(
@@ -28,7 +28,11 @@ class CardListViewModel @AssistedInject constructor(
         repository.getCardsById(state.parentId).execute { copy(cardList = it) }
     }
 
+    //TODO Cascade the deletion to child items.
     fun deleteCard(expenditure: Expenditure) = repository.deleteCard(expenditure).subscribe()
+
+    // Having a state for this seems dumb - needs changing. Maybe make parentId accessible to
+    // the fragment?
     fun clickItem(source: SourceItem) = setState { copy(click = source) }
 
     @AssistedFactory

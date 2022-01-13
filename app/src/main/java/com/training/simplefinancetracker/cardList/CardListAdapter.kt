@@ -11,7 +11,10 @@ import com.training.simplefinancetracker.persistence.CostType
 import com.training.simplefinancetracker.persistence.Expenditure
 import com.training.simplefinancetracker.util.BindingViewHolder
 
-class CardListAdapter( private val longClickListener: (Expenditure) -> Unit) : ListAdapter<CardListAdapter.Item, BindingViewHolder<BaseCardItemBinding>>(
+class CardListAdapter(
+    private val longClickListener: (Expenditure) -> Unit,
+    private val clickListener: (Expenditure) -> Unit
+) : ListAdapter<CardListAdapter.Item, BindingViewHolder<BaseCardItemBinding>>(
     object : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean = when {
             oldItem is Item.ExpenditureItem && newItem is Item.ExpenditureItem
@@ -47,6 +50,11 @@ class CardListAdapter( private val longClickListener: (Expenditure) -> Unit) : L
                 }
             )
             valueTypeTV.text = card.expenditure.label
+
+            root.setOnClickListener {
+                clickListener(card.expenditure)
+            }
+
             root.setOnLongClickListener {
                 longClickListener(card.expenditure)
                 true

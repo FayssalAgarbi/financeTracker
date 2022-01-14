@@ -41,7 +41,6 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), MavericksView {
 
         binding.recycler.layoutManager = layoutManager
         binding.recycler.adapter = adapter
-
     }
 
     private fun clickListener(expenditure: Expenditure) =
@@ -53,9 +52,15 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), MavericksView {
 
     private fun longClickListener(expenditure: Expenditure) = viewModel.deleteCard(expenditure)
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.addItemMI) {
-            viewModel.clickItem(SourceItem.MENU)
+            //TODO cant press this twice, likely cause the SourceItem has already been set once
+            findNavController().navigate(
+                CardListFragmentDirections.actionCardListFragmentToCardAdditionFragment(
+                    viewModel.id.toString()
+                )
+            )
             true
         } else super.onOptionsItemSelected(item)
     }
@@ -64,15 +69,5 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), MavericksView {
         if (state.cardList is Success) {
             adapter.update(state.cardList.invoke())
         }
-        if (state.click == SourceItem.ITEM) findNavController().navigate(
-            CardListFragmentDirections.actionCardListFragmentSelf(
-                state.parentId.toString()
-            )
-        )
-        if (state.click == SourceItem.MENU) findNavController().navigate(
-            //replace these shenanigans with parentViewModel oder whatever?
-            CardListFragmentDirections.actionCardListFragmentToCardAdditionFragment(state.parentId.toString())
-        )
-
     }
 }

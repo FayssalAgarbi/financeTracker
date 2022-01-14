@@ -3,6 +3,7 @@ package com.training.simplefinancetracker.persistence
 import androidx.room.*
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.util.*
 
 @Dao
@@ -16,4 +17,8 @@ interface ExpenditureDao {
 
     @Delete
     fun deleteExpenditure(expenditure: Expenditure): Completable
+
+    @Query("DELETE FROM Expenditure WHERE parentId not in (SELECT id)")
+    fun deleteLooseEnds(): Single<Int>
+
 }

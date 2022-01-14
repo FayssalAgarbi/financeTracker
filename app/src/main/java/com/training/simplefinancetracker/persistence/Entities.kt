@@ -1,6 +1,7 @@
 package com.training.simplefinancetracker.persistence
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
 /*
@@ -30,7 +31,6 @@ data class Expenditure(
     val isPaid: Boolean,
     val parentId: UUID
 )
-
 
 enum class CostType {
     FIX, VARIABLE

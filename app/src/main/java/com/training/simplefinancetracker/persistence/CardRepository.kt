@@ -30,5 +30,16 @@ class CardRepositoryImpl @Inject constructor(
 
     override fun deleteCard(expenditure: Expenditure): Completable =
         expenditureDao.deleteExpenditure(expenditure)
+            .concatWith {
+                //This is likely to be a bad solution, I need to find a better way to
+                //chain a single to a completable
+                var delRows = 0
+                expenditureDao.deleteLooseEnds()
+                    .doAfterSuccess {
+                        delRows = it
+                    }.repeat()
+                    .takeUntil { delRows == 0}
+                    .subscribe()
+            }
             .subscribeOn(Schedulers.io())
 }

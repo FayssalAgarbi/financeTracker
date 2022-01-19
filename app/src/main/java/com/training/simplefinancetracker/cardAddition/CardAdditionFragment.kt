@@ -40,7 +40,7 @@ class CardAdditionFragment : BottomSheetDialogFragment(), MavericksView {
         val adapter = ArrayAdapter(requireContext(), R.layout.base_drop_down_item, items)
         val costTypeET = (binding.costTypeTIL.editText as? AutoCompleteTextView)
         costTypeET?.setAdapter(adapter)
-        costTypeET?.setText(OPTION_FIX, false)
+        costTypeET?.setText(OPTION_VARIABLE, false)
 
 
         binding.saveBt.setOnClickListener {

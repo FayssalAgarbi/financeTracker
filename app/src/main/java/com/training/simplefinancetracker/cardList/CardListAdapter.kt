@@ -40,7 +40,7 @@ class CardListAdapter(
     override fun onBindViewHolder(holder: BindingViewHolder<BaseCardItemBinding>, position: Int) {
         val card = getItem(position)
         with(holder.binding) {
-            root.setCardBackgroundColor(
+            rootCard.setCardBackgroundColor(
                 when ((card as Item.ExpenditureItem).expenditure.costType) {
                     CostType.FIX -> ContextCompat.getColorStateList(root.context, R.color.japonica)
                     CostType.VARIABLE -> ContextCompat.getColorStateList(
@@ -50,11 +50,12 @@ class CardListAdapter(
                 }
             )
             valueTypeTV.text = card.expenditure.label
-
+            valueSummaryTV.text = card.expenditure.cost.toString()
             root.setOnClickListener {
                 clickListener(card.expenditure)
             }
 
+            //TODO change this such that the card can be edited rather than deleted
             root.setOnLongClickListener {
                 longClickListener(card.expenditure)
                 true

@@ -1,9 +1,8 @@
 # FinanceTracker-App
 As the name suggests, this is a simple app to keep tabs of your own finances.
 
-As of date of writing (14th of January 2022) this app is still in its early stages of development, however basic CRUD-functionality
+As of date of writing (14th of January 2022) this app is still in its early stages of development, however basic CRUD-functionality is existent.
 
-is existent.
 
 ## Goals
 My primary goal is to create an app that can help me manage my finances without needing to fear some giant corporation spying on me.

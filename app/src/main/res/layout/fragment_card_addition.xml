@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#6899BA"
     android:layout_margin="8dp"
+    android:background="#6899BA"
     tools:context=".cardAddition.CardAdditionFragment">
 
     <ImageButton
+        android:id="@+id/closeBt"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:background="#00000000"
-        android:id="@+id/closeBt"
-        android:src="@drawable/ic_baseline_close_24"/>
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/labelTIL"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_margin="8dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:hint="Label"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/costTIL"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/closeBt">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -39,17 +39,17 @@
         android:id="@+id/costTIL"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_margin="8dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:hint="Cost"
-        app:layout_constraintStart_toEndOf="@id/labelTIL"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/labelTIL"
         app:layout_constraintTop_toBottomOf="@id/closeBt">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:inputType="numberDecimal"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,30 +63,30 @@
         app:layout_constraintTop_toBottomOf="@id/labelTIL">
 
         <AutoCompleteTextView
-            tools:text="some long text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:inputType="none"
+            tools:text="some long text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-<com.google.android.material.switchmaterial.SwitchMaterial
-    android:id="@+id/paidSwitch"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:checked="true"
-    app:layout_constraintTop_toBottomOf="@id/costTypeTIL"
-    android:text="is paid?"/>
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/paidSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="is paid?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/costTypeTIL" />
 
     <Button
+        android:id="@+id/saveBt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/paidSwitch"
         android:text="save"
-        android:id="@+id/saveBt"/>
+        app:layout_constraintTop_toBottomOf="@id/paidSwitch" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

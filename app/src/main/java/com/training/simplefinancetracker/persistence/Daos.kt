@@ -18,7 +18,6 @@ interface ExpenditureDao {
     @Delete
     fun deleteExpenditure(expenditure: Expenditure): Completable
 
-    @Query("DELETE FROM Expenditure WHERE parentId not in (SELECT id)")
+    @Query("DELETE FROM Expenditure WHERE parentId <> '00000000-0000-0000-0000-000000000000' AND parentId not in (SELECT id FROM EXPENDITURE)")
     fun deleteLooseEnds(): Single<Int>
-
 }

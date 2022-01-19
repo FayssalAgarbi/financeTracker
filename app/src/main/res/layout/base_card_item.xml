@@ -45,13 +45,13 @@
                 android:id="@+id/valueSummaryTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="160 / 240"
                 android:gravity="center"
-                android:textSize="32sp"/>
+                android:padding="8dp"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="160 / 240" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

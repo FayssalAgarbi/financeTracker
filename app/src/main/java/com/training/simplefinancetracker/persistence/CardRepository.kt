@@ -13,6 +13,10 @@ interface CardRepository {
 
     fun insertCard(expenditure: Expenditure): Completable
 
+    fun calculateCardCostById(parentId: UUID): Observable<Pair<Int, Int>>
+
+    fun updateParentCostById(parentId: UUID): Completable
+
     fun deleteCard(expenditure: Expenditure): Completable
 }
 
@@ -28,6 +32,21 @@ class CardRepositoryImpl @Inject constructor(
         expenditureDao.insertExpenditure(expenditure)
             .subscribeOn(Schedulers.io())
 
+
+    override fun calculateCardCostById(parentId: UUID): Observable<Pair<Int, Int>> =
+        Observable.combineLatest(
+            expenditureDao.calculateUnpaidCardCost(parentId).startWith(0),
+            expenditureDao.calculateTotalCardCost(parentId).startWith(0),
+            { a, b ->
+                Pair(a, b)
+            }
+        )
+            .subscribeOn(Schedulers.io())
+
+    override fun updateParentCostById(parentId: UUID): Completable =
+        expenditureDao.updateParentCost(parentId)
+            .subscribeOn(Schedulers.io())
+
     override fun deleteCard(expenditure: Expenditure): Completable =
         expenditureDao.deleteExpenditure(expenditure)
             .concatWith {
@@ -38,7 +57,7 @@ class CardRepositoryImpl @Inject constructor(
                     .doAfterSuccess {
                         delRows = it
                     }.repeat()
-                    .takeUntil { delRows == 0}
+                    .takeUntil { delRows == 0 }
                     .subscribe()
             }
             .subscribeOn(Schedulers.io())

@@ -32,10 +32,10 @@ class HostActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        invalidateOptionsMenu()
         menuInflater.inflate(R.menu.options_menu, menu)
         menu?.findItem(R.id.addItemMI)?.isVisible =
             navController.currentDestination == navController.graph.findNode(R.id.cardListFragment)
+        menu?.findItem(R.id.refreshParentMI)?.isVisible = false
         return true
     }
 

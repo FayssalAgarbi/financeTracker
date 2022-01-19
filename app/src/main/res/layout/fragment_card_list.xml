@@ -30,13 +30,14 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
+            android:id="@+id/totalCostTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="18dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="28sp"
-            android:layout_margin="18dp"
-            tools:text="540/1200"/>
+            tools:text="540/1200" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
